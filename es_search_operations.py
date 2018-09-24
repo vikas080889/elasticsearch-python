@@ -3,6 +3,30 @@ es = Elasticsearch(['http://localhost:9200'])
 
 
 
+'''
+GET /stocks_data/_search
+{
+    "from" : 0, "size" : 50,
+    "query": {
+        "bool" : {
+            "must" : {
+                "script" : {
+                    "script" : {
+                        "source": "doc['50MA'].value < doc['Close_Price'].value"
+                        
+                     }
+                }
+            }
+        }
+    }
+}
+'''
+
+
+
+
+
+
 doc = {
         'size' : 10,
         'query': {
@@ -49,6 +73,7 @@ result_1 = data_1
 
 result = data_2['hits']['hits']
 
+y=0
 for i in result:
     quality = i['_source']['quality']
     id = i['_id']
@@ -63,7 +88,8 @@ for i in result:
                  }
     }
                 )
+    y+=1
     print(stock_label)
-
+print(y)
 
 

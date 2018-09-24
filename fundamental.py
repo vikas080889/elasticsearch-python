@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 from bs4 import BeautifulSoup , Comment
 es = Elasticsearch(['http://localhost:9200'])
 
-for x in range(12):
+for x in range(21):
     url = 'https://www.bseindia.com/markets/equity/EQReports/MktWatchR.aspx?filter=gainer*all$all$&Page='+str(x+1)
     #url  = 'https://www.bseindia.com/markets/equity/EQReports/MktWatchR.aspx?filter=loser*all$all$&Page='+str(x+1)
     #print(url)

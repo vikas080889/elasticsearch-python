@@ -36,7 +36,7 @@ def stock_details(myList):
             murl.append('https://h.marketsmojo.com/stocks/fin_trend/'+i.td.text+'.html')
         return name ,murl
     except:
-        return "something went wrong"
+        return "NA","NA"
 
 
 def get_jojo_url(mystr):
@@ -51,7 +51,7 @@ def get_jojo_url(mystr):
         jojo_summary = 'https://frapi.marketsmojo.com/stocks_dashboard/stockinfo?sid='+m+'&callback=jQuery21105692901213009467_1536953494358'
         return jojo_quality ,jojo_summary
     except:
-        return "fhfhhfhf","mojo analysis not available"
+        return "NA","NA"
 
 
 
@@ -83,7 +83,7 @@ def fetch_summary(myurl):
         jo_stock_label = data['data']['stocklabel']['text']
         return jo_stock_label
     except:
-        return "something went wrong"
+        return "NA"
 
 
 

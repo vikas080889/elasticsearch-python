@@ -51,10 +51,10 @@ def fetch_data_with_cid_store():
     data = es.search(index='ema_50_analysis', doc_type='blog', body=doc)
     data_dict =data['hits']['hits']
     for i in data_dict:
-        close_price =get_daily_close_price(i['_id'])
-        print(i['_id'],close_price)
+        close_price =float(get_daily_close_price(i['_id']))
+        print(i['_id'],close_price,i['_source']['EMA50'])
         try:
-             es.update(index='ema_50_analysis', doc_type='blog', id=i['_id'], body={"doc": {"ltp":close_price}})
+             es.update(index='ema_50_analysis', doc_type='blog', id=i['_id'], body={"doc": {"ltp":close_price,'diff_with_ema_today':round(close_price-i['_source']['EMA50'])}})
         except:
             print('na')
 
@@ -77,7 +77,7 @@ m_dict = json.loads(m_string)
 data = m_dict['searchResult']
 entry_date=date.today().strftime('%b-%d-%Y')
 
-'''
+
 #print(data[-1:])
 for i in data :
     if((float(i['volume'])>=20000) and (float(i['currentPrice'])>30)):
@@ -91,6 +91,5 @@ for i in data :
          diff_with_ema_today = round(ltp-EMA50,2)
          store_to_es(stock,ltp,EMA50,crossing_day_price,diff_with_ema_crossingday,diff_with_ema_today,entry_date,companyId)
 
-'''
 
 
