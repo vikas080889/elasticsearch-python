@@ -15,6 +15,8 @@ doc_2 = {
 }
 data_2 = es.search(index='mojostockslist', doc_type='blog',body=doc_2)
 
+print(data_2)
+
 store_data = data_2['hits']['hits']
 for i in store_data:
     es.index(index='snapshot_mojo_stock',doc_type='blog',id=i['_id'],body={
